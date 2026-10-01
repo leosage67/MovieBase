@@ -1,0 +1,346 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MovieRank | About</title>
+
+</head>
+
+
+<body data-page="about">
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+
+        <div class="container">
+
+            <a
+                class="navbar-brand brand-mark"
+                href="./index.html"
+            >
+                MovieRank
+            </a>
+
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNav"
+            >
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <div
+                class="collapse navbar-collapse"
+                id="mainNav"
+            >
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            data-page="home"
+                            href="./index.html"
+                        >
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            data-page="movies"
+                            href="./movies.html"
+                        >
+                            Movies
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            data-page="rankings"
+                            href="./rankings.html"
+                        >
+                            My Rankings
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            data-page="about"
+                            href="./about.html"
+                        >
+                            About
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <main>
+
+        <section class="py-5">
+
+            <div class="container">
+
+                <div class="row justify-content-center">
+
+                    <div class="col-lg-9">
+
+                        <span class="text-primary fw-bold">
+                            ABOUT MOVIERANK
+                        </span>
+
+                        <h1 class="display-4 fw-bold mt-2 mb-4">
+                            Your movies.
+                            Your ranking.
+                        </h1>
+
+                        <p class="lead text-secondary">
+
+                            MovieRank combines current movie
+                            information with a personal ranking
+                            system so users can discover movies
+                            and organize their favorites in one place.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- HOW IT WORKS -->
+
+        <section class="py-5">
+
+            <div class="container">
+
+                <h2 class="section-title mb-4">
+                    How it works
+                </h2>
+
+
+                <div
+                    class="accordion"
+                    id="aboutAccordion"
+                >
+
+
+                    <div class="accordion-item">
+
+                        <h2 class="accordion-header">
+
+                            <button
+                                class="accordion-button"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne"
+                            >
+
+                                1. Discover movies
+
+                            </button>
+
+                        </h2>
+
+
+                        <div
+                            id="collapseOne"
+                            class="accordion-collapse collapse show"
+                            data-bs-parent="#aboutAccordion"
+                        >
+
+                            <div class="accordion-body">
+
+                                The Movies page uses the
+                                TMDB API to display popular
+                                movies and allow users to search
+                                for specific titles.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="accordion-item">
+
+                        <h2 class="accordion-header">
+
+                            <button
+                                class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo"
+                            >
+
+                                2. Add movies to your rankings
+
+                            </button>
+
+                        </h2>
+
+
+                        <div
+                            id="collapseTwo"
+                            class="accordion-collapse collapse"
+                            data-bs-parent="#aboutAccordion"
+                        >
+
+                            <div class="accordion-body">
+
+                                Users can select a movie and
+                                add it to their personal ranking.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="accordion-item">
+
+                        <h2 class="accordion-header">
+
+                            <button
+                                class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree"
+                            >
+
+                                3. Customize your list
+
+                            </button>
+
+                        </h2>
+
+
+                        <div
+                            id="collapseThree"
+                            class="accordion-collapse collapse"
+                            data-bs-parent="#aboutAccordion"
+                        >
+
+                            <div class="accordion-body">
+
+                                Each movie can be moved up or
+                                down, assigned a category,
+                                and given a personal rating out
+                                of ten.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ROADMAP -->
+
+        <section class="py-5">
+
+            <div class="container">
+
+                <div class="card bg-dark border-secondary">
+
+                    <div class="card-body p-4 p-lg-5">
+
+                        <span class="badge text-bg-primary mb-3">
+                            FUTURE ROADMAP
+                        </span>
+
+                        <h2 class="fw-bold">
+                            Automatic recommendations
+                        </h2>
+
+                        <p class="text-secondary mb-0">
+
+                            A future version could analyze
+                            a user's categories and ratings
+                            to recommend movies that match
+                            their interests.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <footer class="py-5 mt-5">
+
+        <div class="container text-center">
+
+            <p class="fw-bold mb-1">
+                MovieRank
+            </p>
+
+            <p class="small mb-0">
+                Built with HTML, CSS, JavaScript,
+                Bootstrap, Vite, and TMDB.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <script
+        type="module"
+        src="/src/main.js"
+    ></script>
+
+</body>
+
+</html>

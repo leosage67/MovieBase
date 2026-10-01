@@ -1,0 +1,307 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MovieRank | My Rankings</title>
+
+</head>
+
+
+<body data-page="rankings">
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+
+        <div class="container">
+
+            <a
+                class="navbar-brand brand-mark"
+                href="./index.html"
+            >
+                MovieRank
+            </a>
+
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNav"
+            >
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <div
+                class="collapse navbar-collapse"
+                id="mainNav"
+            >
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            data-page="home"
+                            href="./index.html"
+                        >
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            data-page="movies"
+                            href="./movies.html"
+                        >
+                            Movies
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            data-page="rankings"
+                            href="./rankings.html"
+                        >
+                            My Rankings
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            data-page="about"
+                            href="./about.html"
+                        >
+                            About
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <main>
+
+        <section class="py-5">
+
+            <div class="container">
+
+                <div class="row align-items-end g-4 mb-5">
+
+                    <div class="col-lg-8">
+
+                        <span class="text-primary fw-bold">
+                            YOUR COLLECTION
+                        </span>
+
+                        <h1 class="display-4 fw-bold">
+                            My Rankings
+                        </h1>
+
+                        <p class="text-secondary">
+                            Create your own movie hierarchy.
+                            Move movies, rate them, and categorize them.
+                        </p>
+
+                    </div>
+
+
+                    <div class="col-lg-4">
+
+                        <label
+                            for="category-filter"
+                            class="form-label"
+                        >
+                            Filter by category
+                        </label>
+
+                        <select
+                            id="category-filter"
+                            class="form-select"
+                        >
+
+                            <option value="all">
+                                All Categories
+                            </option>
+
+                            <option>
+                                Favorites
+                            </option>
+
+                            <option>
+                                Must Watch
+                            </option>
+
+                            <option>
+                                Action
+                            </option>
+
+                            <option>
+                                Comedy
+                            </option>
+
+                            <option>
+                                Drama
+                            </option>
+
+                            <option>
+                                Horror
+                            </option>
+
+                            <option>
+                                Sci-Fi
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- STATS -->
+
+                <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+
+                    <div class="col">
+
+                        <div class="stat-card rounded-4 p-4">
+
+                            <p class="text-secondary mb-1">
+                                Movies Ranked
+                            </p>
+
+                            <div
+                                class="stat-number"
+                                id="total-movies"
+                            >
+                                0
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col">
+
+                        <div class="stat-card rounded-4 p-4">
+
+                            <p class="text-secondary mb-1">
+                                Average Personal Rating
+                            </p>
+
+                            <div
+                                class="stat-number"
+                                id="average-rating"
+                            >
+                                —
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col">
+
+                        <div class="stat-card rounded-4 p-4">
+
+                            <p class="text-secondary mb-1">
+                                Largest Category
+                            </p>
+
+                            <div
+                                class="stat-number fs-4"
+                                id="top-category"
+                            >
+                                —
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- RANKINGS -->
+
+                <div
+                    id="ranking-list"
+                    class="d-flex flex-column gap-3"
+                >
+
+                    <div class="alert alert-secondary">
+
+                        Your ranking is empty.
+
+                        Go to the
+                        <a
+                            href="./movies.html"
+                            class="alert-link"
+                        >
+                            Movies page
+                        </a>
+                        to add some movies.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <footer class="py-5 mt-5">
+
+        <div class="container text-center">
+
+            <p class="fw-bold mb-1">
+                MovieRank
+            </p>
+
+            <p class="small mb-0">
+                Your rankings are saved locally in your browser.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <script
+        type="module"
+        src="/src/main.js"
+    ></script>
+
+</body>
+
+</html>

@@ -1,0 +1,210 @@
+:root {
+    --mr-bg: #0d0d10;
+    --mr-surface: #17171c;
+    --mr-surface-2: #202027;
+    --mr-border: #303038;
+    --mr-text: #f4f4f5;
+    --mr-muted: #9a9aa3;
+    --mr-accent: #8b7cff;
+    --mr-gold: #f5c451;
+}
+
+
+body {
+    background-color: var(--mr-bg);
+    color: var(--mr-text);
+}
+
+
+.navbar {
+    background-color: rgba(13, 13, 16, 0.96);
+}
+
+
+.brand-mark {
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+
+.hero {
+    min-height: 70vh;
+
+    display: flex;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at 70% 30%,
+            rgba(139, 124, 255, 0.18),
+            transparent 35%
+        ),
+        var(--mr-bg);
+}
+
+
+.hero-title {
+    font-size: clamp(
+        3rem,
+        7vw,
+        6rem
+    );
+
+    font-weight: 800;
+    line-height: 0.95;
+
+    letter-spacing: -3px;
+}
+
+
+.hero-text {
+    max-width: 600px;
+
+    color: var(--mr-muted);
+
+    font-size: 1.1rem;
+}
+
+
+.section-title {
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+
+.movie-card {
+    height: 100%;
+
+    background-color: var(--mr-surface);
+
+    border: 1px solid var(--mr-border);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.movie-card:hover {
+    transform: translateY(-6px);
+
+    border-color: var(--mr-accent);
+}
+
+
+.movie-card img {
+    aspect-ratio: 2 / 3;
+
+    object-fit: cover;
+}
+
+
+.movie-card .card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.movie-card .btn {
+    margin-top: auto;
+}
+
+
+.rating {
+    color: var(--mr-gold);
+
+    font-weight: 700;
+}
+
+
+.movie-description {
+    color: var(--mr-muted);
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 3;
+
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+}
+
+
+.search-area {
+    background-color: var(--mr-surface);
+}
+
+
+.ranking-item {
+    background-color: var(--mr-surface);
+
+    border: 1px solid var(--mr-border);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.ranking-item:hover {
+    border-color: var(--mr-accent);
+}
+
+
+.ranking-number {
+    font-size: 2rem;
+
+    font-weight: 800;
+
+    color: var(--mr-accent);
+}
+
+
+.ranking-poster {
+    width: 70px;
+    height: 105px;
+
+    object-fit: cover;
+}
+
+
+.stat-card {
+    background-color: var(--mr-surface);
+
+    border: 1px solid var(--mr-border);
+}
+
+
+.stat-number {
+    font-size: 2rem;
+
+    font-weight: 800;
+}
+
+
+footer {
+    border-top: 1px solid var(--mr-border);
+
+    color: var(--mr-muted);
+}
+
+
+/* Small screen adjustments */
+
+@media (max-width: 767px) {
+
+    .hero {
+        min-height: 60vh;
+    }
+
+    .hero-title {
+        letter-spacing: -1px;
+    }
+
+    .ranking-poster {
+        width: 55px;
+        height: 80px;
+    }
+}

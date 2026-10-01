@@ -1,8 +1,435 @@
 <!doctype html>
+
 <html lang="en">
-  <head>
-    <h1>
-      FilmBase
-    </h1>
-  </head>
-</html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MovieRank | Discover Movies</title>
+
+</head>
+
+
+<body data-page="home">
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+
+        <div class="container">
+
+            <a
+                class="navbar-brand brand-mark"
+                href="./index.html"
+            >
+                MovieRank
+            </a>
+
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNav"
+                aria-controls="mainNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <div
+                class="collapse navbar-collapse"
+                id="mainNav"
+            >
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            data-page="home"
+                            href="./index.html"
+                        >
+                            Home
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            data-page="movies"
+                            href="./movies.html"
+                        >
+                            Movies
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            data-page="rankings"
+                            href="./rankings.html"
+                        >
+                            My Rankings
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            data-page="about"
+                            href="./about.html"
+                        >
+                            About
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="container">
+
+            <div class="row align-items-center g-5">
+
+                <div class="col-lg-8">
+
+                    <span class="badge text-bg-primary mb-3">
+                        YOUR PERSONAL MOVIE DATABASE
+                    </span>
+
+
+                    <h1 class="hero-title mb-4">
+                        Discover movies.
+                        Rank your favorites.
+                    </h1>
+
+
+                    <p class="hero-text mb-4">
+
+                        See what's popular, explore
+                        movie ratings, and create
+                        your own personal ranking.
+
+                    </p>
+
+
+                    <a
+                        href="./movies.html"
+                        class="btn btn-light btn-lg"
+                    >
+                        Explore Movies
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FEATURED -->
+
+    <section class="py-5">
+
+        <div class="container">
+
+            <div class="mb-4">
+
+                <span class="text-primary fw-bold">
+                    FEATURED
+                </span>
+
+                <h2 class="section-title mt-1">
+                    Popular right now
+                </h2>
+
+            </div>
+
+
+            <div
+                id="featuredCarousel"
+                class="carousel slide"
+                data-bs-ride="carousel"
+            >
+
+                <div
+                    id="featured-slides"
+                    class="carousel-inner"
+                >
+
+                    <div class="carousel-item active">
+
+                        <div class="alert alert-secondary">
+                            Loading featured movies...
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#featuredCarousel"
+                    data-bs-slide="prev"
+                >
+
+                    <span
+                        class="carousel-control-prev-icon"
+                    ></span>
+
+                    <span class="visually-hidden">
+                        Previous
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#featuredCarousel"
+                    data-bs-slide="next"
+                >
+
+                    <span
+                        class="carousel-control-next-icon"
+                    ></span>
+
+                    <span class="visually-hidden">
+                        Next
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- POPULAR -->
+
+    <section class="py-5">
+
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-end mb-4">
+
+                <div>
+
+                    <span class="text-primary fw-bold">
+                        TRENDING NOW
+                    </span>
+
+                    <h2 class="section-title">
+                        Popular Movies
+                    </h2>
+
+                </div>
+
+
+                <a
+                    href="./movies.html"
+                    class="btn btn-outline-light"
+                >
+                    View All
+                </a>
+
+            </div>
+
+
+            <div
+                id="home-popular"
+                class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 g-4"
+            >
+
+                <div class="col">
+
+                    <div class="alert alert-secondary">
+                        Loading...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ALERT -->
+
+    <section class="pb-5">
+
+        <div class="container">
+
+            <div
+                class="alert alert-info alert-dismissible fade show"
+                role="alert"
+            >
+
+                <strong>Build your list.</strong>
+
+                Add movies to My Rankings,
+                then choose your category
+                and personal rating.
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- MODAL -->
+
+    <div
+        class="modal fade"
+        id="movieModal"
+        tabindex="-1"
+        aria-labelledby="movieModalLabel"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-dialog modal-lg modal-dialog-centered"
+        >
+
+            <div class="modal-content bg-dark text-light">
+
+                <div class="modal-header">
+
+                    <h1
+                        class="modal-title fs-4"
+                        id="modal-title"
+                    >
+                        Movie Details
+                    </h1>
+
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+
+                </div>
+
+
+                <div
+                    class="modal-body"
+                    id="modal-body"
+                >
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- TOAST -->
+
+    <div
+        class="toast-container position-fixed bottom-0 end-0 p-3"
+    >
+
+        <div
+            id="site-toast"
+            class="toast text-bg-dark"
+            role="alert"
+        >
+
+            <div class="toast-body"></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="py-5 mt-5">
+
+        <div class="container text-center">
+
+            <p class="mb-1 fw-bold">
+                MovieRank
+            </p>
+
+            <p class="small mb-1">
+                This product uses the TMDB API
+                but is not endorsed or certified by TMDB.
+            </p>
+
+            <p class="small mb-0">
+                Movie data and images provided by TMDB.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <script
+        type="module"
+        src="/src/main.js"
+    ></script>
+
+</body>
+
+</html> 
