@@ -19,6 +19,8 @@
 <body data-page="rankings">
 
 
+    <!-- NAVBAR -->
+
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
 
         <div class="container">
@@ -51,6 +53,7 @@
                 <ul class="navbar-nav ms-auto">
 
                     <li class="nav-item">
+
                         <a
                             class="nav-link"
                             data-page="home"
@@ -58,9 +61,12 @@
                         >
                             Home
                         </a>
+
                     </li>
 
+
                     <li class="nav-item">
+
                         <a
                             class="nav-link"
                             data-page="movies"
@@ -68,9 +74,12 @@
                         >
                             Movies
                         </a>
+
                     </li>
 
+
                     <li class="nav-item">
+
                         <a
                             class="nav-link"
                             data-page="rankings"
@@ -78,9 +87,12 @@
                         >
                             My Rankings
                         </a>
+
                     </li>
 
+
                     <li class="nav-item">
+
                         <a
                             class="nav-link"
                             data-page="about"
@@ -88,6 +100,7 @@
                         >
                             About
                         </a>
+
                     </li>
 
                 </ul>
@@ -102,76 +115,120 @@
 
     <main>
 
+
+        <!-- PAGE HEADER -->
+
         <section class="py-5">
 
             <div class="container">
 
-                <div class="row align-items-end g-4 mb-5">
+                <span class="text-primary fw-bold">
+                    YOUR COLLECTION
+                </span>
 
-                    <div class="col-lg-8">
+                <h1 class="display-4 fw-bold">
+                    My Rankings
+                </h1>
+
+                <p class="text-secondary col-lg-8">
+
+                    Create different movie lists,
+                    give each movie a personal rating,
+                    and rank your movies within each list.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- LIST MANAGEMENT -->
+
+        <section class="pb-5">
+
+            <div class="container">
+
+                <div
+                    class="d-flex flex-wrap justify-content-between
+                           align-items-center gap-3 mb-4"
+                >
+
+                    <h2 class="section-title mb-0">
+                        My Lists
+                    </h2>
+
+
+                    <button
+                        class="btn btn-primary"
+                        id="new-list-button"
+                        type="button"
+                    >
+                        + New List
+                    </button>
+
+                </div>
+
+
+
+                <!-- LIST CARDS -->
+
+                <div
+                    id="lists-container"
+                    class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"
+                >
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ACTIVE LIST -->
+
+        <section class="py-5 search-area">
+
+            <div class="container">
+
+
+                <div
+                    class="d-flex flex-wrap
+                           justify-content-between
+                           align-items-end
+                           gap-3 mb-4"
+                >
+
+                    <div>
 
                         <span class="text-primary fw-bold">
-                            YOUR COLLECTION
+                            CURRENT LIST
                         </span>
 
-                        <h1 class="display-4 fw-bold">
-                            My Rankings
-                        </h1>
-
-                        <p class="text-secondary">
-                            Create your own movie hierarchy.
-                            Move movies, rate them, and categorize them.
-                        </p>
+                        <h2
+                            class="section-title"
+                            id="active-list-title"
+                        >
+                            My Favorites
+                        </h2>
 
                     </div>
 
 
-                    <div class="col-lg-4">
+                    <div>
 
                         <label
-                            for="category-filter"
+                            for="active-list-select"
                             class="form-label"
                         >
-                            Filter by category
+                            Switch List
                         </label>
 
                         <select
-                            id="category-filter"
+                            id="active-list-select"
                             class="form-select"
                         >
-
-                            <option value="all">
-                                All Categories
-                            </option>
-
-                            <option>
-                                Favorites
-                            </option>
-
-                            <option>
-                                Must Watch
-                            </option>
-
-                            <option>
-                                Action
-                            </option>
-
-                            <option>
-                                Comedy
-                            </option>
-
-                            <option>
-                                Drama
-                            </option>
-
-                            <option>
-                                Horror
-                            </option>
-
-                            <option>
-                                Sci-Fi
-                            </option>
-
                         </select>
 
                     </div>
@@ -180,21 +237,71 @@
 
 
 
+                <!-- LIST CONTROLS -->
+
+                <div
+                    class="d-flex flex-wrap gap-2 mb-5"
+                >
+
+                    <button
+                        class="btn btn-outline-light"
+                        id="rename-list-button"
+                        type="button"
+                    >
+                        Rename List
+                    </button>
+
+
+                    <button
+                        class="btn btn-outline-danger"
+                        id="delete-list-button"
+                        type="button"
+                    >
+                        Delete List
+                    </button>
+
+                </div>
+
+
+
                 <!-- STATS -->
 
-                <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+                <div
+                    class="row row-cols-1 row-cols-md-3
+                           g-4 mb-5"
+                >
 
                     <div class="col">
 
                         <div class="stat-card rounded-4 p-4">
 
                             <p class="text-secondary mb-1">
-                                Movies Ranked
+                                Total Lists
                             </p>
 
                             <div
                                 class="stat-number"
-                                id="total-movies"
+                                id="total-lists"
+                            >
+                                0
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col">
+
+                        <div class="stat-card rounded-4 p-4">
+
+                            <p class="text-secondary mb-1">
+                                Movies In This List
+                            </p>
+
+                            <div
+                                class="stat-number"
+                                id="active-movies"
                             >
                                 0
                             </div>
@@ -214,27 +321,7 @@
 
                             <div
                                 class="stat-number"
-                                id="average-rating"
-                            >
-                                —
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="col">
-
-                        <div class="stat-card rounded-4 p-4">
-
-                            <p class="text-secondary mb-1">
-                                Largest Category
-                            </p>
-
-                            <div
-                                class="stat-number fs-4"
-                                id="top-category"
+                                id="active-average"
                             >
                                 —
                             </div>
@@ -253,22 +340,6 @@
                     id="ranking-list"
                     class="d-flex flex-column gap-3"
                 >
-
-                    <div class="alert alert-secondary">
-
-                        Your ranking is empty.
-
-                        Go to the
-                        <a
-                            href="./movies.html"
-                            class="alert-link"
-                        >
-                            Movies page
-                        </a>
-                        to add some movies.
-
-                    </div>
-
                 </div>
 
             </div>
@@ -279,6 +350,111 @@
 
 
 
+    <!-- CREATE / RENAME MODAL -->
+
+    <div
+        class="modal fade"
+        id="listModal"
+        tabindex="-1"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-dialog modal-dialog-centered"
+        >
+
+            <div class="modal-content bg-dark text-light">
+
+                <div class="modal-header">
+
+                    <h1
+                        class="modal-title fs-5"
+                        id="listModalTitle"
+                    >
+                        Create New List
+                    </h1>
+
+
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+
+                </div>
+
+
+                <form id="list-form">
+
+                    <div class="modal-body">
+
+                        <label
+                            for="list-name"
+                            class="form-label"
+                        >
+                            List Name
+                        </label>
+
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="list-name"
+                            maxlength="50"
+                            placeholder="Example: Best Movies Ever"
+                            required
+                        >
+
+
+                        <input
+                            type="hidden"
+                            id="list-mode"
+                            value="create"
+                        >
+
+                        <input
+                            type="hidden"
+                            id="list-id"
+                            value=""
+                        >
+
+                    </div>
+
+
+                    <div class="modal-footer">
+
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Cancel
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                            id="listModalSubmit"
+                        >
+                            Create List
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
     <footer class="py-5 mt-5">
 
         <div class="container text-center">
@@ -288,7 +464,8 @@
             </p>
 
             <p class="small mb-0">
-                Your rankings are saved locally in your browser.
+                Your lists and rankings are saved
+                locally in your browser.
             </p>
 
         </div>

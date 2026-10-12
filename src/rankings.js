@@ -1,157 +1,954 @@
-const STORAGE_KEY = "movieRankrRankings";
+const STORAGE_KEY =
+    "movieRankrLists";
+
+const ACTIVE_LIST_KEY =
+    "movieRankrActiveList";
 
 
-// Available categories
-export const CATEGORIES = [
-    "Favorites",
-    "Must Watch",
-    "Action",
-    "Comedy",
-    "Drama",
-    "Horror",
-    "Sci-Fi"
-];
+// ==================================================
+// CREATE ID
+// ==================================================
 
+function createId() {
 
-// Get saved rankings
-export function getRankings() {
+    if (
+        crypto &&
+        crypto.randomUUID
+    ) {
 
-    const saved =
-        localStorage.getItem(STORAGE_KEY);
+        return crypto.randomUUID();
 
-    if (!saved) {
-        return [];
     }
 
-    try {
-        return JSON.parse(saved);
-    } catch {
-        return [];
-    }
+
+    return Date.now().toString();
 }
 
 
-// Save rankings
-export function saveRankings(rankings) {
+// ==================================================
+// DEFAULT LIST
+// ==================================================
+
+function createDefaultLists() {
+
+    return [
+
+        {
+            id:
+                createId(),
+
+            name:
+                "My Favorites",
+
+            movies:
+                []
+        }
+
+    ];
+}
+
+
+// ==================================================
+// NORMALIZE LISTS
+// ==================================================
+
+function normalizeLists(
+    lists
+) {
+
+    let changed =
+        false;
+
+
+    lists.forEach(
+        list => {
+
+            if (
+                !Array.isArray(
+                    list.movies
+                )
+            ) {
+
+                list.movies =
+                    [];
+
+                changed =
+                    true;
+            }
+
+
+            list.movies.forEach(
+                (movie, index) => {
+
+                    if (
+                        !movie.addedAt
+                    ) {
+
+                        movie.addedAt =
+                            Date.now() -
+                            (
+                                (
+                                    list.movies.length -
+                                    index
+                                )
+                                * 60000
+                            );
+
+                        changed =
+                            true;
+                    }
+
+
+                    if (
+                        !Array.isArray(
+                            movie.genres
+                        )
+                    ) {
+
+                        movie.genres =
+                            [];
+
+                        changed =
+                            true;
+                    }
+
+
+                    if (
+                        movie.personalRating ===
+                        undefined
+                    ) {
+
+                        movie.personalRating =
+                            0;
+
+                        changed =
+                            true;
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    if (
+        changed
+    ) {
+
+        saveLists(
+            lists
+        );
+    }
+
+
+    return lists;
+}
+
+
+// ==================================================
+// GET LISTS
+// ==================================================
+
+export function getLists() {
+
+    const saved =
+        localStorage.getItem(
+            STORAGE_KEY
+        );
+
+
+    if (
+        saved
+    ) {
+
+        try {
+
+            const lists =
+                JSON.parse(
+                    saved
+                );
+
+
+            if (
+                Array.isArray(
+                    lists
+                ) &&
+                lists.length > 0
+            ) {
+
+                return normalizeLists(
+                    lists
+                );
+
+            }
+
+        } catch {
+
+            console.log(
+                "Could not read saved lists."
+            );
+
+        }
+
+    }
+
+
+    // ==============================================
+    // OLD RANKING MIGRATION
+    // ==============================================
+
+    const oldRankings =
+        localStorage.getItem(
+            "movieRankrRankings"
+        );
+
+
+    if (
+        oldRankings
+    ) {
+
+        try {
+
+            const oldMovies =
+                JSON.parse(
+                    oldRankings
+                );
+
+
+            if (
+                Array.isArray(
+                    oldMovies
+                )
+            ) {
+
+                const now =
+                    Date.now();
+
+
+                const movies =
+                    oldMovies.map(
+                        (movie, index) => ({
+
+                            id:
+                                movie.id,
+
+                            title:
+                                movie.title,
+
+                            poster_path:
+                                movie.poster_path,
+
+                            release_date:
+                                movie.release_date,
+
+                            vote_average:
+                                movie.vote_average,
+
+                            personalRating:
+                                movie.personalRating ||
+                                0,
+
+                            genres:
+                                movie.genres ||
+                                [],
+
+                            addedAt:
+                                now -
+                                (
+                                    (
+                                        oldMovies.length -
+                                        index
+                                    )
+                                    * 60000
+                                )
+
+                        })
+                    );
+
+
+                const migrated = [
+
+                    {
+                        id:
+                            createId(),
+
+                        name:
+                            "My Favorites",
+
+                        movies
+                    }
+
+                ];
+
+
+                saveLists(
+                    migrated
+                );
+
+
+                return migrated;
+            }
+
+        } catch {
+
+            console.log(
+                "Could not migrate old rankings."
+            );
+
+        }
+
+    }
+
+
+    const defaults =
+        createDefaultLists();
+
+
+    saveLists(
+        defaults
+    );
+
+
+    return defaults;
+}
+
+
+// ==================================================
+// SAVE
+// ==================================================
+
+export function saveLists(
+    lists
+) {
 
     localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify(rankings)
+        JSON.stringify(
+            lists
+        )
     );
 }
 
 
-// Check if movie is already ranked
-export function isMovieRanked(movieId) {
+// ==================================================
+// ACTIVE LIST ID
+// ==================================================
 
-    const rankings = getRankings();
+export function getActiveListId() {
 
-    return rankings.some(
-        movie => movie.id === movieId
-    );
-}
+    const lists =
+        getLists();
 
 
-// Add movie
-export function addMovie(movie) {
+    const savedId =
+        localStorage.getItem(
+            ACTIVE_LIST_KEY
+        );
 
-    const rankings = getRankings();
+
+    const valid =
+        lists.some(
+            list =>
+                list.id ===
+                savedId
+        );
+
 
     if (
-        rankings.some(
-            item => item.id === movie.id
-        )
+        valid
     ) {
-        return rankings;
+
+        return savedId;
     }
 
-    rankings.push({
-        id: movie.id,
-        title: movie.title,
-        poster_path: movie.poster_path,
-        release_date: movie.release_date,
-        vote_average: movie.vote_average,
-        category: "Favorites",
-        personalRating: 0
+
+    const firstId =
+        lists[0].id;
+
+
+    localStorage.setItem(
+        ACTIVE_LIST_KEY,
+        firstId
+    );
+
+
+    return firstId;
+}
+
+
+// ==================================================
+// SET ACTIVE LIST
+// ==================================================
+
+export function setActiveListId(
+    listId
+) {
+
+    const lists =
+        getLists();
+
+
+    const exists =
+        lists.some(
+            list =>
+                list.id ===
+                listId
+        );
+
+
+    if (
+        !exists
+    ) {
+
+        return getActiveListId();
+    }
+
+
+    localStorage.setItem(
+        ACTIVE_LIST_KEY,
+        listId
+    );
+
+
+    return listId;
+}
+
+
+// ==================================================
+// GET ACTIVE LIST
+// ==================================================
+
+export function getActiveList() {
+
+    const lists =
+        getLists();
+
+
+    const id =
+        getActiveListId();
+
+
+    return (
+        lists.find(
+            list =>
+                list.id ===
+                id
+        ) ||
+        lists[0]
+    );
+}
+
+
+// ==================================================
+// CREATE LIST
+// ==================================================
+
+export function createList(
+    name
+) {
+
+    const cleanName =
+        name.trim();
+
+
+    if (
+        !cleanName
+    ) {
+
+        return getLists();
+    }
+
+
+    const lists =
+        getLists();
+
+
+    const newList = {
+
+        id:
+            createId(),
+
+        name:
+            cleanName,
+
+        movies:
+            []
+
+    };
+
+
+    lists.push(
+        newList
+    );
+
+
+    saveLists(
+        lists
+    );
+
+
+    setActiveListId(
+        newList.id
+    );
+
+
+    return lists;
+}
+
+
+// ==================================================
+// RENAME LIST
+// ==================================================
+
+export function renameList(
+    listId,
+    name
+) {
+
+    const cleanName =
+        name.trim();
+
+
+    if (
+        !cleanName
+    ) {
+
+        return getLists();
+    }
+
+
+    const lists =
+        getLists();
+
+
+    const list =
+        lists.find(
+            item =>
+                item.id ===
+                listId
+        );
+
+
+    if (
+        list
+    ) {
+
+        list.name =
+            cleanName;
+
+    }
+
+
+    saveLists(
+        lists
+    );
+
+
+    return lists;
+}
+
+
+// ==================================================
+// DELETE LIST
+// ==================================================
+
+export function deleteList(
+    listId
+) {
+
+    const lists =
+        getLists();
+
+
+    if (
+        lists.length <= 1
+    ) {
+
+        return lists;
+    }
+
+
+    const wasActive =
+        listId ===
+        getActiveListId();
+
+
+    const updated =
+        lists.filter(
+            list =>
+                list.id !==
+                listId
+        );
+
+
+    saveLists(
+        updated
+    );
+
+
+    if (
+        wasActive
+    ) {
+
+        setActiveListId(
+            updated[0].id
+        );
+    }
+
+
+    return updated;
+}
+
+
+// ==================================================
+// MOVIE IN LIST?
+// ==================================================
+
+export function isMovieInList(
+    movieId,
+    listId =
+        getActiveListId()
+) {
+
+    const lists =
+        getLists();
+
+
+    const list =
+        lists.find(
+            item =>
+                item.id ===
+                listId
+        );
+
+
+    if (
+        !list
+    ) {
+
+        return false;
+    }
+
+
+    return list.movies.some(
+        movie =>
+            movie.id ===
+            movieId
+    );
+}
+
+
+// ==================================================
+// ADD MOVIE
+// ==================================================
+
+export function addMovie(
+    movie,
+    listId =
+        getActiveListId()
+) {
+
+    const lists =
+        getLists();
+
+
+    const list =
+        lists.find(
+            item =>
+                item.id ===
+                listId
+        );
+
+
+    if (
+        !list
+    ) {
+
+        return lists;
+    }
+
+
+    const exists =
+        list.movies.some(
+            item =>
+                item.id ===
+                movie.id
+        );
+
+
+    if (
+        exists
+    ) {
+
+        return lists;
+    }
+
+
+    list.movies.push({
+
+        id:
+            movie.id,
+
+        title:
+            movie.title,
+
+        poster_path:
+            movie.poster_path,
+
+        release_date:
+            movie.release_date,
+
+        vote_average:
+            movie.vote_average,
+
+        personalRating:
+            0,
+
+        genres:
+            Array.isArray(
+                movie.genres
+            )
+                ? movie.genres.map(
+                    genre =>
+                        typeof genre ===
+                        "string"
+                            ? genre
+                            : genre.name
+                )
+                : [],
+
+        addedAt:
+            Date.now()
+
     });
 
-    saveRankings(rankings);
 
-    return rankings;
+    saveLists(
+        lists
+    );
+
+
+    return lists;
 }
 
 
-// Remove movie
-export function removeMovie(index) {
+// ==================================================
+// REMOVE MOVIE
+// ==================================================
 
-    const rankings = getRankings();
+export function removeMovie(
+    index,
+    listId =
+        getActiveListId()
+) {
 
-    rankings.splice(index, 1);
+    const lists =
+        getLists();
 
-    saveRankings(rankings);
 
-    return rankings;
+    const list =
+        lists.find(
+            item =>
+                item.id ===
+                listId
+        );
+
+
+    if (
+        !list
+    ) {
+
+        return lists;
+    }
+
+
+    list.movies.splice(
+        index,
+        1
+    );
+
+
+    saveLists(
+        lists
+    );
+
+
+    return lists;
 }
 
 
-// Move movie
-export function moveMovie(index, direction) {
+// ==================================================
+// MOVE MOVIE
+// ==================================================
 
-    const rankings = getRankings();
+export function moveMovie(
+    index,
+    direction,
+    listId =
+        getActiveListId()
+) {
+
+    const lists =
+        getLists();
+
+
+    const list =
+        lists.find(
+            item =>
+                item.id ===
+                listId
+        );
+
+
+    if (
+        !list
+    ) {
+
+        return lists;
+    }
+
 
     const newIndex =
-        index + direction;
+        index +
+        direction;
+
 
     if (
         newIndex < 0 ||
-        newIndex >= rankings.length
+        newIndex >=
+            list.movies.length
     ) {
-        return rankings;
+
+        return lists;
     }
 
+
     [
-        rankings[index],
-        rankings[newIndex]
+        list.movies[index],
+        list.movies[newIndex]
     ] = [
-        rankings[newIndex],
-        rankings[index]
+
+        list.movies[newIndex],
+        list.movies[index]
+
     ];
 
-    saveRankings(rankings);
 
-    return rankings;
+    saveLists(
+        lists
+    );
+
+
+    return lists;
 }
 
 
-// Change category
-export function updateCategory(
-    index,
-    category
-) {
+// ==================================================
+// UPDATE RATING
+// ==================================================
 
-    const rankings = getRankings();
-
-    rankings[index].category =
-        category;
-
-    saveRankings(rankings);
-
-    return rankings;
-}
-
-
-// Change personal rating
 export function updateRating(
     index,
-    rating
+    rating,
+    listId =
+        getActiveListId()
 ) {
 
-    const rankings = getRankings();
+    const lists =
+        getLists();
 
-    rankings[index].personalRating =
-        Number(rating);
 
-    saveRankings(rankings);
+    const list =
+        lists.find(
+            item =>
+                item.id ===
+                listId
+        );
 
-    return rankings;
+
+    if (
+        !list
+    ) {
+
+        return lists;
+    }
+
+
+    list.movies[index]
+        .personalRating =
+            Number(
+                rating
+            );
+
+
+    saveLists(
+        lists
+    );
+
+
+    return lists;
+}
+
+
+// ==================================================
+// UPDATE GENRES
+// ==================================================
+
+export function updateMovieGenres(
+    movieId,
+    genres,
+    listId
+) {
+
+    const lists =
+        getLists();
+
+
+    const list =
+        lists.find(
+            item =>
+                item.id ===
+                listId
+        );
+
+
+    if (
+        !list
+    ) {
+
+        return lists;
+    }
+
+
+    const movie =
+        list.movies.find(
+            item =>
+                item.id ===
+                movieId
+        );
+
+
+    if (
+        !movie
+    ) {
+
+        return lists;
+    }
+
+
+    movie.genres =
+        Array.isArray(
+            genres
+        )
+            ? genres
+            : [];
+
+
+    saveLists(
+        lists
+    );
+
+
+    return lists;
 }

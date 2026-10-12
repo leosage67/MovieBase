@@ -208,3 +208,66 @@ footer {
         height: 80px;
     }
 }
+
+#movie-list-select,
+#active-list-select {
+    background-color: var(--mr-surface);
+    color: var(--mr-text);
+    border-color: var(--mr-border);
+}
+
+#movie-list-select option,
+#active-list-select option {
+    background-color: var(--mr-surface);
+    color: var(--mr-text);
+}
+
+.list-card,
+.list-card .card-body,
+.list-card .card-title {
+    color: var(--mr-text);
+}
+
+/* ------------------------------
+   LIST VIEW
+------------------------------ */
+
+#list-title {
+    word-break: break-word;
+}
+
+
+#movie-list .ranking-item {
+    color: var(--mr-text);
+}
+
+
+#movie-list .ranking-item h5 {
+    color: var(--mr-text);
+}
+
+
+#sort-select {
+    background-color: var(--mr-surface);
+    color: var(--mr-text);
+    border-color: var(--mr-border);
+}
+
+
+#sort-select option {
+    background-color: var(--mr-surface);
+    color: var(--mr-text);
+}
+
+
+#movie-list .form-select {
+    background-color: var(--mr-surface);
+    color: var(--mr-text);
+    border-color: var(--mr-border);
+}
+
+
+#movie-list .form-select option {
+    background-color: var(--mr-surface);
+    color: var(--mr-text);
+}

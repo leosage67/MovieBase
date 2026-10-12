@@ -1,0 +1,378 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MovieRank | Movie Details</title>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+
+        <div class="container">
+
+            <a
+                class="navbar-brand brand-mark"
+                href="./index.html"
+            >
+                MovieRank
+            </a>
+
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNav"
+                aria-controls="mainNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <div
+                class="collapse navbar-collapse"
+                id="mainNav"
+            >
+
+                <ul class="navbar-nav ms-auto">
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="./index.html"
+                        >
+                            Home
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link active"
+                            href="./movies.html"
+                        >
+                            Movies
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="./rankings.html"
+                        >
+                            My Rankings
+                        </a>
+
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="./about.html"
+                        >
+                            About
+                        </a>
+
+                    </li>
+
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- MOVIE DETAILS -->
+
+    <main>
+
+        <section
+            id="movie-details"
+            class="py-5"
+        >
+
+            <div class="container">
+
+                <!-- Back -->
+
+                <div class="mb-4">
+
+                    <a
+                        href="./movies.html"
+                        class="btn btn-outline-light"
+                    >
+                        ← Back to Movies
+                    </a>
+
+                </div>
+
+
+                <!-- Loading -->
+
+                <div
+                    id="movie-loading"
+                    class="text-center py-5"
+                >
+
+                    <div
+                        class="spinner-border text-primary"
+                        role="status"
+                    >
+
+                        <span class="visually-hidden">
+                            Loading...
+                        </span>
+
+                    </div>
+
+
+                    <p class="text-secondary mt-3">
+
+                        Loading movie details...
+
+                    </p>
+
+                </div>
+
+
+                <!-- Error -->
+
+                <div
+                    id="movie-error"
+                    class="alert alert-danger d-none"
+                >
+
+                    Could not load this movie.
+
+                </div>
+
+
+                <!-- CONTENT -->
+
+                <div
+                    id="movie-content"
+                    class="d-none"
+                >
+
+                    <!-- Movie Hero -->
+
+                    <div class="row g-5 align-items-start">
+
+
+                        <!-- Poster -->
+
+                        <div
+                            class="col-md-4 col-lg-3"
+                        >
+
+                            <img
+                                id="movie-poster"
+                                class="img-fluid rounded-4 shadow"
+                                alt=""
+                            >
+
+                        </div>
+
+
+                        <!-- Information -->
+
+                        <div class="col-md-8 col-lg-9">
+
+                            <span
+                                id="movie-rating"
+                                class="badge text-bg-warning fs-6 mb-3"
+                            >
+                            </span>
+
+
+                            <h1
+                                id="movie-title"
+                                class="display-4 fw-bold"
+                            >
+                            </h1>
+
+
+                            <p
+                                id="movie-meta"
+                                class="text-secondary"
+                            >
+                            </p>
+
+
+                            <div
+                                id="movie-genres"
+                                class="mb-4"
+                            >
+                            </div>
+
+
+                            <h2 class="h4 fw-bold">
+                                Description
+                            </h2>
+
+
+                            <p
+                                id="movie-overview"
+                                class="text-secondary fs-5"
+                            >
+                            </p>
+
+
+                            <div class="mt-4">
+
+                                <button
+                                    id="add-movie-button"
+                                    type="button"
+                                    class="btn btn-primary btn-lg"
+                                >
+                                    Add to My List
+                                </button>
+
+
+                                <a
+                                    href="./rankings.html"
+                                    class="btn btn-outline-light btn-lg ms-2"
+                                >
+                                    My Rankings
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- TRAILER -->
+
+                    <section class="mt-5 pt-5">
+
+                        <div class="mb-4">
+
+                            <span
+                                class="text-primary fw-bold"
+                            >
+                                WATCH
+                            </span>
+
+
+                            <h2 class="section-title">
+                                Trailer
+                            </h2>
+
+                        </div>
+
+
+                        <div
+                            id="trailer-container"
+                            class="ratio ratio-16x9 rounded-4 overflow-hidden"
+                        >
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- TOAST -->
+
+    <div
+        class="toast-container
+               position-fixed
+               bottom-0
+               end-0
+               p-3"
+    >
+
+        <div
+            id="site-toast"
+            class="toast text-bg-dark"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+        >
+
+            <div class="toast-body">
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="py-5 mt-5">
+
+        <div class="container text-center">
+
+            <p class="fw-bold mb-1">
+                MovieRank
+            </p>
+
+
+            <p class="small mb-1">
+                This product uses the TMDB API
+                but is not endorsed or certified by TMDB.
+            </p>
+
+
+            <p class="small mb-0">
+                Movie data and images provided by TMDB.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <script
+        type="module"
+        src="/src/movie-details.js"
+    ></script>
+
+</body>
+
+</html>
